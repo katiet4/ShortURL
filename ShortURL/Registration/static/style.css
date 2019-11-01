@@ -10,7 +10,12 @@ body{
   text-align: center;
   background-color: #D3D3D3;
 }
-
+header{
+  text-align: left;
+}
+header a{
+  padding: 10px 10px 10px 10px;
+}
 /* table tr th{
   padding: 10px 10px 10px 10px;
 }

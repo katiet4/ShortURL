@@ -7,7 +7,7 @@ from django.utils import timezone
 # Create your views here.
 
 def renderSite(request, authenticated):
-
+        host = request.get_host()
         color = 'green'
         if request.POST:
             url = request.POST['url']
@@ -21,7 +21,7 @@ def renderSite(request, authenticated):
                 else:
                     sandfurl = SandFURL(username = "", FURL = url, SURL = surl)
                     sandfurl.save()
-                    return render(request, 'MSURLTemp/MSURL.html',{'urlsAnon':[url, "localhost/"+surl, str(0), timezone.now()],'style':""})
+                    return render(request, 'MSURLTemp/MSURL.html',{'urlsAnon':[url, host+'/'+surl, str(0), timezone.now()],'style':""})
             except Exception as e:
                 color = 'red'
                 print(e)
@@ -34,7 +34,7 @@ def renderSite(request, authenticated):
             if (SandFURL.objects.filter(username = request.user.username).exists()):
                 return render(request, 'MSURLTemp/MSURL.html',
                                 { "urls": SandFURL.objects.filter(username = request.user.username),
-                                'style':style, "aunt": True})
+                                'style':style, "aunt": True,'host':host+'/'})
             else:
                 return render(request, 'MSURLTemp/MSURL.html',{'style':style, "aunt": True})
         return render(request, 'MSURLTemp/MSURL.html',{'style':style})

@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import auth
 
 def login(request):
+    print(request.user.is_authenticated)
     if request.user.is_authenticated:
         return HttpResponseRedirect("/msurl")
     else:
@@ -18,8 +19,5 @@ def login(request):
         else:
             return render(request, "LoginTemp/login.html")
 def logout(request):
-    if request.user.is_authenticated:
-        auth.logout(request)
-        return HttpResponseRedirect("/login")
-    else:
-        return HttpResponseRedirect("/login")
+    auth.logout(request)
+    return HttpResponseRedirect("/login")

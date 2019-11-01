@@ -1,6 +1,6 @@
 {% extends "index.html"%}
 
-{%block title%}Login{%endblock%}
+{%block title%}MSURL{%endblock%}
 
 {%block head%}
 {% load staticfiles %}
@@ -36,7 +36,7 @@
     {%for url in urls%}
       <tr>
         <td>{{url.FURL}}</td>
-        <td>localhost/{{url.SURL}}</td>
+        <td>{{host}}{{url.SURL}}</td>
         <td>{{url.howlongUsed}}</td>
         <td>{{url.date}}</td>
       </tr>
