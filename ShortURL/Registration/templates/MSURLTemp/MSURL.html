@@ -1,0 +1,53 @@
+{% extends "index.html"%}
+
+{%block title%}Login{%endblock%}
+
+{%block head%}
+{% load staticfiles %}
+  <script type="text/javascript" src="{% static 'validate.js' %}">
+  </script>
+{%endblock%}
+
+{%block header%}
+  {%if aunt%}
+    <a href="/login/logout">Logout</a>
+  {%else%}
+    <a href="/login">Login</a>
+    <a href="/registration">Registration</a>
+  {%endif%}
+{%endblock%}
+
+{%block content%}
+  <form name="contact_form" action="" method="post" onsubmit="return validate_for_MSURL;">
+    <div class="form-group">
+      <!-- <label for="url">URL:</label><input type="text" style="{{style}}" name="url" placeholder="http://<URL>" id = 'url'><br> -->
+      <input type="text" style="{{style}}" name="url" placeholder="http://<URL>" id = 'url' class="form-control"><br>
+      <input type="submit" name="sub" value="Generate" class="btn btn-primary">
+    </div>
+    {% csrf_token %}
+  </form>
+  <table class="table">
+    <tr>
+      <th>Full link</th>
+      <th>Short link</th>
+      <th>How long used</th>
+      <th>Date</th>
+    </tr>
+    {%for url in urls%}
+      <tr>
+        <td>{{url.FURL}}</td>
+        <td>localhost/{{url.SURL}}</td>
+        <td>{{url.howlongUsed}}</td>
+        <td>{{url.date}}</td>
+      </tr>
+    {%endfor%}
+
+      <tr>
+        {%for url in urlsAnon%}
+        <td>{{url}}</td>
+        {%endfor%}
+      </tr>
+
+  </table>
+
+{%endblock%}

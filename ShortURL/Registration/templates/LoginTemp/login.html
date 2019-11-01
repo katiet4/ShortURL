@@ -1,0 +1,26 @@
+{% extends "index.html"%}
+
+{%block title%}Login{%endblock%}
+
+{%block head%}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'validate.js' %}">
+</script>
+{%endblock%}
+
+{%block header%}
+<a href="/login">Login</a>
+<a href="/registration">Registration</a>
+<a href="/msurl">Short url</a>
+{%endblock%}
+
+{%block content%}
+  <form name="contact_form" action="" method="post"  onsubmit="return validate_form_for_login();">
+    <!-- <label for="username">Username </label><input type="text" name="username" placeholder="Username" id = "username"><br>
+    <label for="password">Password </label><input type="password" name="password" placeholder="Password" id = "password"><br> -->
+    <input type="text" name="username" placeholder="Username" id = "username" class="form-control"><br>
+    <input type="password" name="password" placeholder="Password" id = "password" class="form-control"><br>
+    <input type="submit" name="send" value="Login" class="btn btn-primary">
+    {% csrf_token %}
+  </form>
+{%endblock%}
